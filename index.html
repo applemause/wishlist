@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wishlist</title>
+  <meta
+    name="description"
+    content="Простая страница вишлиста с красивыми карточками и локальным сохранением."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">My Wishlist</p>
+      <h1>Список желаний, который приятно показывать друзьям</h1>
+      <p class="hero-copy">
+        Добавляй подарки, ссылки и маленькие подсказки. Все сохраняется в браузере автоматически.
+      </p>
+      <a class="hero-link" href="#wishlist-form">Добавить желание</a>
+    </header>
+
+    <main class="layout">
+      <section class="panel form-panel">
+        <div class="panel-heading">
+          <p class="section-kicker">Новое желание</p>
+          <h2>Заполни карточку</h2>
+        </div>
+
+        <form id="wishlist-form" class="wishlist-form">
+          <label>
+            Название
+            <input id="title" name="title" type="text" maxlength="80" placeholder="Например, Kindle Paperwhite" required>
+          </label>
+
+          <label>
+            Описание
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              maxlength="220"
+              placeholder="Что именно хочется, в каком цвете, издании или комплектации"
+            ></textarea>
+          </label>
+
+          <label>
+            Ссылка
+            <input id="link" name="link" type="url" placeholder="https://...">
+          </label>
+
+          <label>
+            Приоритет
+            <select id="priority" name="priority">
+              <option value="Очень хочу">Очень хочу</option>
+              <option value="Буду рад(а)">Буду рад(а)</option>
+              <option value="Когда-нибудь">Когда-нибудь</option>
+            </select>
+          </label>
+
+          <button type="submit">Сохранить в wishlist</button>
+        </form>
+      </section>
+
+      <section class="panel list-panel">
+        <div class="panel-heading panel-heading-inline">
+          <div>
+            <p class="section-kicker">Список</p>
+            <h2>Мои желания</h2>
+          </div>
+          <button id="clear-all" class="ghost-button" type="button">Очистить всё</button>
+        </div>
+
+        <div id="empty-state" class="empty-state">
+          Пока пусто. Добавь первый подарок мечты и он появится здесь.
+        </div>
+
+        <div id="wishlist-items" class="wishlist-grid" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <template id="wishlist-card-template">
+    <article class="wish-card">
+      <div class="wish-card-header">
+        <span class="priority-pill"></span>
+        <button class="delete-button" type="button" aria-label="Удалить желание">Удалить</button>
+      </div>
+      <h3 class="wish-title"></h3>
+      <p class="wish-description"></p>
+      <a class="wish-link" target="_blank" rel="noreferrer noopener">Открыть ссылку</a>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>

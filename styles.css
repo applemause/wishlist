@@ -1,0 +1,347 @@
+:root {
+  --bg: #f4efe7;
+  --bg-accent: #efe2d0;
+  --panel: rgba(255, 252, 247, 0.82);
+  --panel-border: rgba(111, 78, 55, 0.18);
+  --text: #2f241d;
+  --muted: #726153;
+  --accent: #ad5f2b;
+  --accent-deep: #894319;
+  --shadow: 0 24px 60px rgba(78, 49, 30, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Manrope", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.8), transparent 32%),
+    radial-gradient(circle at right, rgba(228, 170, 116, 0.2), transparent 28%),
+    linear-gradient(135deg, var(--bg) 0%, #f8f5ef 45%, var(--bg-accent) 100%);
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: auto;
+  z-index: -1;
+  border-radius: 999px;
+  filter: blur(12px);
+}
+
+body::before {
+  width: 18rem;
+  height: 18rem;
+  top: 4rem;
+  right: -4rem;
+  background: rgba(239, 179, 116, 0.22);
+}
+
+body::after {
+  width: 16rem;
+  height: 16rem;
+  bottom: -2rem;
+  left: -3rem;
+  background: rgba(173, 95, 43, 0.12);
+}
+
+.page-shell {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.hero {
+  padding: 3rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--panel-border);
+  border-radius: 32px;
+  background: linear-gradient(145deg, rgba(255, 251, 245, 0.9), rgba(245, 230, 212, 0.65));
+  box-shadow: var(--shadow);
+}
+
+.eyebrow,
+.section-kicker {
+  margin: 0 0 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.hero h1,
+.panel h2,
+.wish-title {
+  font-family: "Fraunces", serif;
+}
+
+.hero h1 {
+  margin: 0;
+  max-width: 10ch;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 0.95;
+}
+
+.hero-copy {
+  max-width: 38rem;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.hero-link,
+.wishlist-form button,
+.ghost-button,
+.wish-link,
+.delete-button {
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.6rem;
+  padding: 0.95rem 1.35rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff9f2;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 18px 32px rgba(137, 67, 25, 0.22);
+}
+
+.hero-link:hover,
+.wishlist-form button:hover,
+.ghost-button:hover,
+.wish-link:hover,
+.delete-button:hover {
+  transform: translateY(-2px);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+.panel {
+  padding: 1.5rem;
+  border: 1px solid var(--panel-border);
+  border-radius: 28px;
+  background: var(--panel);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+}
+
+.panel-heading h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.panel-heading-inline {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.wishlist-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.wishlist-form label {
+  display: grid;
+  gap: 0.5rem;
+  font-weight: 700;
+}
+
+.wishlist-form input,
+.wishlist-form textarea,
+.wishlist-form select {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(111, 78, 55, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--text);
+  font: inherit;
+}
+
+.wishlist-form input:focus,
+.wishlist-form textarea:focus,
+.wishlist-form select:focus {
+  outline: 2px solid rgba(173, 95, 43, 0.18);
+  border-color: rgba(173, 95, 43, 0.5);
+}
+
+.wishlist-form textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+.wishlist-form button {
+  margin-top: 0.25rem;
+  padding: 1rem 1.2rem;
+  border: 0;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+  color: #fff8f2;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.ghost-button,
+.delete-button {
+  border: 1px solid rgba(111, 78, 55, 0.16);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.ghost-button {
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+}
+
+.empty-state {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  margin-top: 1.25rem;
+  padding: 2rem;
+  border: 1px dashed rgba(111, 78, 55, 0.26);
+  border-radius: 24px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.7;
+}
+
+.empty-state.is-hidden {
+  display: none;
+}
+
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.wish-card {
+  position: relative;
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.2rem;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(245, 232, 218, 0.86));
+  border: 1px solid rgba(111, 78, 55, 0.12);
+  overflow: hidden;
+}
+
+.wish-card::after {
+  content: "";
+  position: absolute;
+  inset: auto -2rem -2rem auto;
+  width: 7rem;
+  height: 7rem;
+  background: radial-gradient(circle, rgba(173, 95, 43, 0.15), transparent 68%);
+}
+
+.wish-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.priority-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(173, 95, 43, 0.12);
+  color: var(--accent-deep);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.delete-button {
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.wish-title {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.wish-description {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.wish-link {
+  justify-self: start;
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(47, 36, 29, 0.92);
+  color: #fff7ef;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.wish-link.is-hidden {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100% - 1rem, 1120px);
+    padding-top: 0.5rem;
+  }
+
+  .hero h1 {
+    max-width: none;
+  }
+
+  .panel-heading-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ghost-button {
+    width: 100%;
+  }
+}
