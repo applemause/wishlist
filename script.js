@@ -1,119 +1,49 @@
-const STORAGE_KEY = "wishlist-items-v1";
+const wishlistItems = [
+  {
+    title: "Amazon item",
+    price: "See price on Amazon",
+    image:
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80",
+    link: "https://www.amazon.de/-/en/dp/B0DJYL6P77/?coliid=I3LO5LTVY8YSVL&colid=24BXUX7RJO8CT&psc=1&ref_=list_c_wl_lv_ov_lig_dp_it",
+  },
+  {
+    title: "Marshall Major V",
+    price: "149 EUR",
+    image:
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80",
+    link: "https://www.marshall.com/",
+  },
+  {
+    title: "Lego Icons Set",
+    price: "199 EUR",
+    image:
+      "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=900&q=80",
+    link: "https://www.lego.com/",
+  },
+  {
+    title: "Fujifilm Instax Mini Evo",
+    price: "189 EUR",
+    image:
+      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=900&q=80",
+    link: "https://www.fujifilm.com/",
+  },
+];
 
-const form = document.getElementById("wishlist-form");
 const itemsRoot = document.getElementById("wishlist-items");
-const emptyState = document.getElementById("empty-state");
-const clearAllButton = document.getElementById("clear-all");
 const cardTemplate = document.getElementById("wishlist-card-template");
 
-let wishlistItems = loadItems();
+wishlistItems.forEach((item) => {
+  const cardFragment = cardTemplate.content.cloneNode(true);
+  const image = cardFragment.querySelector(".wish-image");
+  const title = cardFragment.querySelector(".wish-title");
+  const price = cardFragment.querySelector(".wish-price");
+  const link = cardFragment.querySelector(".wish-link");
 
-render();
+  image.src = item.image;
+  image.alt = item.title;
+  title.textContent = item.title;
+  price.textContent = item.price;
+  link.href = item.link;
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const formData = new FormData(form);
-  const title = formData.get("title").toString().trim();
-  const description = formData.get("description").toString().trim();
-  const link = formData.get("link").toString().trim();
-  const priority = formData.get("priority").toString();
-
-  if (!title) {
-    return;
-  }
-
-  wishlistItems.unshift({
-    id: crypto.randomUUID(),
-    title,
-    description,
-    link,
-    priority,
-  });
-
-  persistItems();
-  render();
-  form.reset();
+  itemsRoot.append(cardFragment);
 });
-
-clearAllButton.addEventListener("click", () => {
-  if (!wishlistItems.length) {
-    return;
-  }
-
-  const confirmed = window.confirm("Удалить все желания?");
-  if (!confirmed) {
-    return;
-  }
-
-  wishlistItems = [];
-  persistItems();
-  render();
-});
-
-function loadItems() {
-  const savedValue = window.localStorage.getItem(STORAGE_KEY);
-
-  if (!savedValue) {
-    return [
-      {
-        id: crypto.randomUUID(),
-        title: "Kindle Paperwhite",
-        description: "Для чтения вечером, лучше версия с теплой подсветкой.",
-        link: "https://www.amazon.de/",
-        priority: "Очень хочу",
-      },
-      {
-        id: crypto.randomUUID(),
-        title: "Lego Icons",
-        description: "Что-нибудь красивое для полки в гостиной.",
-        link: "",
-        priority: "Буду рад(а)",
-      },
-    ];
-  }
-
-  try {
-    const parsed = JSON.parse(savedValue);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-function persistItems() {
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(wishlistItems));
-}
-
-function render() {
-  itemsRoot.innerHTML = "";
-  emptyState.classList.toggle("is-hidden", wishlistItems.length > 0);
-
-  wishlistItems.forEach((item) => {
-    const cardFragment = cardTemplate.content.cloneNode(true);
-    const card = cardFragment.querySelector(".wish-card");
-    const priorityPill = cardFragment.querySelector(".priority-pill");
-    const title = cardFragment.querySelector(".wish-title");
-    const description = cardFragment.querySelector(".wish-description");
-    const link = cardFragment.querySelector(".wish-link");
-    const deleteButton = cardFragment.querySelector(".delete-button");
-
-    priorityPill.textContent = item.priority;
-    title.textContent = item.title;
-    description.textContent = item.description || "Описание можно добавить позже.";
-
-    if (item.link) {
-      link.href = item.link;
-    } else {
-      link.classList.add("is-hidden");
-    }
-
-    deleteButton.addEventListener("click", () => {
-      wishlistItems = wishlistItems.filter((entry) => entry.id !== item.id);
-      persistItems();
-      render();
-    });
-
-    itemsRoot.append(card);
-  });
-}
