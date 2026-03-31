@@ -1,7 +1,7 @@
 const wishlistItems = [
   {
-    title: "Amazon item",
-    price: "See price on Amazon",
+    title: "Wiiuka Case for iPhone 16 Pro, Leather",
+    price: "50 EUR",
     image:
       "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80",
     link: "https://www.amazon.de/-/en/dp/B0DJYL6P77/?coliid=I3LO5LTVY8YSVL&colid=24BXUX7RJO8CT&psc=1&ref_=list_c_wl_lv_ov_lig_dp_it",
