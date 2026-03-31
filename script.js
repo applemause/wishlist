@@ -7,11 +7,11 @@ const wishlistItems = [
     link: "https://www.amazon.de/-/en/dp/B0DJYL6P77/?coliid=I3LO5LTVY8YSVL&colid=24BXUX7RJO8CT&psc=1&ref_=list_c_wl_lv_ov_lig_dp_it",
   },
   {
-    title: "Marshall Major V",
-    price: "149 EUR",
+    title: "Mobile Phone Ring for MagSafe - Magnetic Holder",
+    price: "16 EUR",
     image:
       "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80",
-    link: "https://www.marshall.com/",
+    link: "https://www.amazon.de/-/en/dp/B0DGVG1K6Z/?coliid=I3QKQEWIYON8YW&colid=24BXUX7RJO8CT&ref_=list_c_wl_lv_ov_lig_dp_it&th=1",
   },
   {
     title: "Lego Icons Set",
